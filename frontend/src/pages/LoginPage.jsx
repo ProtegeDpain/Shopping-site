@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../services/api';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -13,12 +14,14 @@ const LoginPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Perform login logic here
-    console.log(formData);
-    // Redirect to home page after login
-    navigate('/');
+    const response = await loginUser(formData);
+    if (response.user) {
+      navigate('/');
+    } else {
+      alert('Invalid email or password');
+    }
   };
 
   return (

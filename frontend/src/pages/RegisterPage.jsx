@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { registerUser } from '../services/api';
+//import { useHistory } from 'react-router-dom';
+
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -14,13 +17,26 @@ const RegisterPage = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
-  const handleSubmit = (e) => {
+  //const history = useHistory();
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can perform form validation and submission logic here
-    console.log(formData);
-    // Redirect to login page after registration
-    navigate('/login');
+    try {
+      const response = await fetch(`${API_BASE_URL}/users/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+      if (response.ok) {
+        // User successfully registered, you can redirect or show a success message
+        //history.push('/login');
+      } else {
+        // Handle registration errors
+      }
+    } catch (error) {
+      console.error('Error registering user:', error);
+    }
   };
 
   return (

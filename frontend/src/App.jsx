@@ -1,4 +1,4 @@
-import React from 'react';
+  import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import ProductList from './pages/ProductList';
 import RegisterPage from './pages/RegisterPage';
@@ -17,7 +17,7 @@ function App() {
     <Router>
       <div className="App">
         <header>
-        <h1>E-commerce App</h1>
+        <button><h1><b>E-commerce App</b></h1></button>
         <nav>
           <ul className='navbuttons'>
             <li>
